@@ -48,7 +48,7 @@ def parallelize__emsInput( nParallel=1, ptsFile="dat/coordinate.dat", \
     for ik in range( nParallel ):
         with open( cooFile.format(ik), "r" ) as f:
             str_coordinates = f.read()
-        emsSettings_ = emsSettings.format( nLineList[ik], str_coordinates )
+        emsSettings_ = emsSettings.format( nLineList[ik], str_coordinates.strip() )
         
         with open( outFile_.format(ik), "w" ) as f:
             f.write( emsSettings_ )
