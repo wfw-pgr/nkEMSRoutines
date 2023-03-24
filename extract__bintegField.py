@@ -34,7 +34,7 @@ def extract__bintegField( inpFile=None, outFile=None ):
         if ( len( line.strip() ) == 0 ): break
 
     iL     = iS + iL
-    nLine  = iL - iS
+    nLine  = iL - iS - 1
 
     # ------------------------------------------------- #
     # --- [4] Load Data using numpy                 --- #
