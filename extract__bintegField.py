@@ -7,7 +7,7 @@ import numpy as np
 # ===  extract__bintegField.py                          === #
 # ========================================================= #
 
-def extract__bintegField( inpFile=None, outFile=None ):
+def extract__bintegField( inpFile=None, outFile=None, save=True ):
 
     # ------------------------------------------------- #
     # --- [1] Arguments                             --- #
@@ -44,12 +44,11 @@ def extract__bintegField( inpFile=None, outFile=None ):
     # ------------------------------------------------- #
     # --- [5] save in a file                        --- #
     # ------------------------------------------------- #
-    import nkUtilities.save__pointFile as spf
-    names = [ "x", "y", "z", "bx", "by", "bz", "|b|" ]
-    if ( outFile is None ):
-        outFile = inpFile.replace( ".out", ".dat" )
-    spf.save__pointFile( outFile=outFile, Data=Data, names=names )
-
+    if ( save ):
+        if ( outFile is None ): outFile = inpFile.replace( ".out", ".dat" )
+        import nkUtilities.save__pointFile as spf
+        names = [ "x", "y", "z", "bx", "by", "bz", "|b|" ]
+        spf.save__pointFile( outFile=outFile, Data=Data, names=names )
     return( Data )
 
 

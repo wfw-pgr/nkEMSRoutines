@@ -7,15 +7,22 @@ import numpy as np
 # ===  merge__bintegField.py                            === #
 # ========================================================= #
 
-def merge__bintegField( inpFile=None, outFile=None ):
+def merge__bintegField( inpFiles=None, outFile=None ):
 
     # ------------------------------------------------- #
     # --- [1] Arguments                             --- #
     # ------------------------------------------------- #
-    if ( inpFile is None ):
+    if   ( inpFiles is None ):
         sys.exit( "[merge__bintegField.py] inpFile == ??? " )
-    else:
+    elif ( type( inpFiles ) is str  ):
         inpFiles = glob.glob( inpFile )
+    elif ( type( inpFiles ) is list ):
+        for inpFile in inpFiles:
+            if not( os.path.exists( inpFile ) ):
+                print( "[merge__bintegField.py] cannot find {} ".format( inpFile ) )
+                sys.exit()
+                
+        
     if ( outFile is None ):
         outFile = "ems_merged.dat"
         
@@ -26,8 +33,7 @@ def merge__bintegField( inpFile=None, outFile=None ):
     Data_list   = []
     for ifile in inpFiles:
         ext        = "." + ( ifile.split( "." ) )[-1]
-        outFile    = ifile.replace( ext, ".mid_dat" )
-        Data_list += [ ebf.extract__bintegField( inpFile=ifile, outFile=outFile ) ]
+        Data_list += [ ebf.extract__bintegField( inpFile=ifile, save=False ) ]
     Data = np.concatenate( Data_list, axis=0 )
     
     # ------------------------------------------------- #
@@ -53,19 +59,10 @@ if ( __name__=="__main__" ):
     # ------------------------------------------------- #
     # --- [2] Arguments                             --- #
     # ------------------------------------------------- #
-    if   ( len( sys.argv ) == 2 ):
-        inpFile = sys.argv[1]
-        outFile = None
-    elif ( len( sys.argv ) == 3 ):
-        inpFile = sys.argv[1]
-        outFile = sys.argv[2]
-    else:
-        sys.exit( "[merge__bintegField.py]  inpFile == ??? [ERROR]" )
-
-    print( "[merge__bintegField.py] inpFile == {}".format( inpFile ) )
-    print( "[merge__bintegField.py] outFile == {}".format( outFile ) )
+    inpFiles = sys.argv[1:]
+    print( "[merge__bintegField.py] inpFile == {}".format( inpFiles ) )
     
     # ------------------------------------------------- #
     # --- [3] merge                               --- #
     # ------------------------------------------------- #
-    merge__bintegField( inpFile=inpFile, outFile=outFile )
+    merge__bintegField( inpFiles=inpFiles )
