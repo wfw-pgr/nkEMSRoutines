@@ -84,6 +84,10 @@ if ( __name__=="__main__" ):
     parser.add_argument( "--x3MinMaxNum", nargs=3, help="x3MinMaxNum for structurization." )
     args   = parser.parse_args()
     print( "[merge__bintegField.py] inpFiles == {}".format( args.inpFiles ) )
+    if ( args.x1MinMaxNum is not None ): args.x1MinMaxNum = [ float(val) for val in args.x1MinMaxNum ]
+    if ( args.x2MinMaxNum is not None ): args.x2MinMaxNum = [ float(val) for val in args.x2MinMaxNum ]
+    if ( args.x3MinMaxNum is not None ): args.x3MinMaxNum = [ float(val) for val in args.x3MinMaxNum ]
+    
     
     # ------------------------------------------------- #
     # --- [3] merge                                 --- #
