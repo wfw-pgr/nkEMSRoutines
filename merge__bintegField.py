@@ -74,10 +74,20 @@ if ( __name__=="__main__" ):
     # ------------------------------------------------- #
     # --- [2] Arguments                             --- #
     # ------------------------------------------------- #
-    inpFiles = sys.argv[1:]
-    print( "[merge__bintegField.py] inpFile == {}".format( inpFiles ) )
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument( "--inpFiles"   , nargs="+", help="input EMSolution Files." )
+    parser.add_argument( "--outFile"    , help="output file name." )
+    parser.add_argument( "--vtsFile"    , help="output vtk structured file: ***.vts" )
+    parser.add_argument( "--x1MinMaxNum", help="x1MinMaxNum for structurization." )
+    parser.add_argument( "--x2MinMaxNum", help="x2MinMaxNum for structurization." )
+    parser.add_argument( "--x3MinMaxNum", help="x3MinMaxNum for structurization." )
+    args   = parser.parse_args()
+    print( "[merge__bintegField.py] inpFiles == {}".format( args.inpFiles ) )
     
     # ------------------------------------------------- #
-    # --- [3] merge                               --- #
+    # --- [3] merge                                 --- #
     # ------------------------------------------------- #
-    merge__bintegField( inpFiles=inpFiles )
+    merge__bintegField( inpFiles   =args.inpFiles   , outFile    =args.outFile, \
+                        x1MinMaxNum=args.x1MinMaxNum, x2MinMaxNum=args.x2MinMaxNum, \
+                        x3MinMaxNum=args.x3MinMaxNum, vtsFile    =args.vtsFile )
