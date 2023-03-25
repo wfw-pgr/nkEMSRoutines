@@ -30,17 +30,15 @@ def extract__bintegField( inpFile=None, outFile=None ):
     for iS, line in enumerate( lines ):
         research = re.search( pattern_start, line )
         if ( research ): break
+    iS     = iS + 1
     for iL,line in enumerate( lines[iS:] ):
         if ( len( line.strip() ) == 0 ): break
-
     iL     = iS + iL
-    nLine  = iL - iS - 1
 
     # ------------------------------------------------- #
     # --- [4] Load Data using numpy                 --- #
     # ------------------------------------------------- #
-    with open( inpFile, "r" ) as f:
-        Data = np.loadtxt( f, skiprows=iS+1, max_rows=nLine )
+    Data = np.loadtxt( lines[iS:iL] )
     Data = np.copy( Data[:,1:] )
 
     # ------------------------------------------------- #
