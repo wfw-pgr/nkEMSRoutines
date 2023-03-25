@@ -79,9 +79,9 @@ if ( __name__=="__main__" ):
     parser.add_argument( "--inpFiles"   , nargs="+", help="input EMSolution Files." )
     parser.add_argument( "--outFile"    , help="output file name." )
     parser.add_argument( "--vtsFile"    , help="output vtk structured file: ***.vts" )
-    parser.add_argument( "--x1MinMaxNum", help="x1MinMaxNum for structurization." )
-    parser.add_argument( "--x2MinMaxNum", help="x2MinMaxNum for structurization." )
-    parser.add_argument( "--x3MinMaxNum", help="x3MinMaxNum for structurization." )
+    parser.add_argument( "--x1MinMaxNum", nargs=3, help="x1MinMaxNum for structurization." )
+    parser.add_argument( "--x2MinMaxNum", nargs=3, help="x2MinMaxNum for structurization." )
+    parser.add_argument( "--x3MinMaxNum", nargs=3, help="x3MinMaxNum for structurization." )
     args   = parser.parse_args()
     print( "[merge__bintegField.py] inpFiles == {}".format( args.inpFiles ) )
     
