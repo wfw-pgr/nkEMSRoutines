@@ -36,10 +36,10 @@ def merge__bintegField( inpFiles=None, outFile="ems_merged.dat", vtsFile=None, s
     # ------------------------------------------------- #
     # --- [3] store in grid                         --- #
     # ------------------------------------------------- #
-    if ( structured=True ):
-        import nkBasicAlgs.store__inGrid_python as sig
-        Data = sig.store__inGrid( Data=Data, digit=digit, x1MinMaxNum=x1MinMaxNum, \
-                                  x2MinMaxNum=x2MinMaxNum, x3MinMaxNum=x3MinMaxNum )
+    if ( structured ):
+        import nkBasicAlgs.structurize__intoGrid as sig
+        Data = sig.structurize__intoGrid( Data=Data, digit=digit, x1MinMaxNum=x1MinMaxNum, \
+                                          x2MinMaxNum=x2MinMaxNum, x3MinMaxNum=x3MinMaxNum )
     
     # ------------------------------------------------- #
     # --- [4] save in a file                        --- #
@@ -51,7 +51,6 @@ def merge__bintegField( inpFiles=None, outFile="ems_merged.dat", vtsFile=None, s
         import nkVTKRoutines.convert__vtkStructuredGrid as vts
         names    = ["Bx","By","Bz","|B|"]
         vts.convert__vtkStructuredGrid( Data=Data, outFile=vtsFile, names=names )
-
 
     # ------------------------------------------------- #
     # --- [5] return                                --- #
